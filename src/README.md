@@ -1,0 +1,1 @@
+This folder contains the application source code in Typescript.
