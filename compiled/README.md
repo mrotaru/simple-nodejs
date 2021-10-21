@@ -1,0 +1,1 @@
+This folder will contain the compiled application, from Typescript to es6.
