@@ -1,7 +1,9 @@
 import { Server } from "http"
 
-import { AppError, DatabaseWrapper } from './types'
 import { handlers as taskHandlers } from './tasks/endpoints'
+import { handlers as listHandlers } from './lists/endpoints'
+import { AppError, DatabaseWrapper } from './types'
+
 import { handle } from './utils'
 
 export default class App {
@@ -37,8 +39,8 @@ export default class App {
         // routing
         if (req.url === '/tasks' || req.url?.startsWith('/tasks/')) {
           handle(req, res, this.db, taskHandlers).catch(errorHandler)
-        // } else if (req.url === '/lists') {
-        //   handle(req, res, this.db, listHandlers).catch(this.errorHandler)
+        } else if (req.url === '/lists' || req.url?.startsWith('/lists/')) {
+          handle(req, res, this.db, listHandlers).catch(errorHandler)
         } else {
           errorHandler("UNKNOWN_ROUTE")
         }

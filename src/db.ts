@@ -8,6 +8,7 @@ export class PostgresWrapper implements DatabaseWrapper {
   private connected: boolean = false;
   private connecting: boolean = false;
   private pool: Pool | null = null;
+  private logQueries: boolean = true;
 
   constructor(connectionString: string) {
     this.connectionString = connectionString
@@ -39,6 +40,9 @@ export class PostgresWrapper implements DatabaseWrapper {
     }
     if (!this.connected || !this.pool) {
       return Promise.reject('Database not connected')
+    }
+    if (this.logQueries) {
+      console.log(`  ${query}`)
     }
     return this.pool.query(query, args)
   }

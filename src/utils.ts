@@ -38,12 +38,12 @@ export const parseRequest = (req: IncomingMessage): Promise<ParsedRequest> => {
   ok(req.url) // assert req.url is truthy
   const url = new URL(req.url, `http://${req.headers.host}`);
   const pathComponents = url.pathname.split('/').filter(component => component.length)
-  // console.log(url, url.pathname, pathComponents)
+  // console.log(url.pathname, pathComponents)
   if (pathComponents.length > 2) {
     console.error(`Invalid path: ${url.pathname}`)
     return Promise.reject("INVALID_PATH")
   }
-  if (pathComponents.length > 1 && Number.isInteger(pathComponents[1])) {
+  if (pathComponents.length > 1 && Number.isInteger(Number(pathComponents[1]))) {
     id = parseInt(pathComponents[1])
   }
 

@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS lists (
 );
 
 CREATE TABLE IF NOT EXISTS tasksLists (
-  taskId INTEGER REFERENCES tasks (id),
-  listId INTEGER REFERENCES lists (id)
+  listId INTEGER REFERENCES lists (id),
+  taskId INTEGER REFERENCES tasks (id)
 );
+
+CREATE UNIQUE INDEX tasksListsIndex ON tasksLists (listId, taskId);
